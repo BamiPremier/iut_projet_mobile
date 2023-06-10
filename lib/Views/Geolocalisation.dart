@@ -27,7 +27,7 @@ class Geolocalisation extends StatelessWidget {
         markerId: MarkerId('0'),
         draggable: false,
         infoWindow: InfoWindow(
-          title: "Votre depart",
+          title: "Voici la classe",
         ),
         onTap: () {
           //print('this is where you will arrive');
