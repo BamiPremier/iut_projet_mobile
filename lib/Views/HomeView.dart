@@ -1,24 +1,15 @@
-import 'package:Fahkap/components/Button/uploadImage.dart';
-import 'package:Fahkap/components/Widget/HomeComponent.dart';
-import 'package:Fahkap/components/Widget/SalleDefaultComponent.dart';
-import 'package:Fahkap/components/Widget/app_input_new.dart';
-import 'package:Fahkap/components/Widget/app_title_right.dart';
-import 'package:Fahkap/controller/MyController.dart';
-import 'package:Fahkap/utils/Services/validators.dart';
-import 'package:Fahkap/utils/constants/assets.dart';
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/components/Text/titleText.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:iut/components/Button/uploadImage.dart';
+import 'package:iut/components/Widget/HomeComponent.dart';
+import 'package:iut/components/Widget/SalleDefaultComponent.dart';
+import 'package:iut/components/Widget/app_input_new.dart';
+import 'package:iut/components/Widget/app_title_right.dart';
+import 'package:iut/controller/MyController.dart';
+import 'package:iut/utils/Services/validators.dart';
+import 'package:iut/styles/colorApp.dart';
+import 'package:iut/styles/textStyle.dart';
+import 'package:iut/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../components/Button/app_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -113,21 +104,26 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                   )),
                               onTap: () => Get.toNamed(AppLinks.LIST_BATIMENT),
                             ),
-                            Expanded(
-                              child: GridView.builder(
-                                  // physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 10.0,
-                                          mainAxisSpacing: 1.0),
-                                  itemCount: _controller.SalleDList.length,
-                                  itemBuilder: (_ctx, index) =>
-                                      SalleDefaultComponent(
-                                          salle:
-                                              _controller.SalleDList[index])),
-                            )
+                            (_controller.isLoadedSalleD == 0)
+                                ? CircularProgressIndicator(
+                                    color: Colors.blueAccent,
+                                  )
+                                : Expanded(
+                                    child: GridView.builder(
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 10.0,
+                                                mainAxisSpacing: 1.0),
+                                        itemCount:
+                                            _controller.SalleDList.length,
+                                        itemBuilder: (_ctx, index) =>
+                                            SalleDefaultComponent(
+                                                salle: _controller
+                                                    .SalleDList[index])),
+                                  )
                           ])))
               : RefreshIndicator(
                   color: ColorsApp.skyBlue,

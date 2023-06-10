@@ -1,6 +1,6 @@
 // ignore: must_be_immutable
-import 'package:Fahkap/components/Text/smallText.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:iut/components/Text/smallText.dart';
+import 'package:iut/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

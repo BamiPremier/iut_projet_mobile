@@ -24,32 +24,4 @@ abstract class ColorsApp {
   static Color textColor =
       Get.isDarkMode ? Color(0xffB40001) : Color(0xFFF1F6FA);
 }
-
-abstract class GradientApp {
-  static const LinearGradient blueG = LinearGradient(
-    begin: Alignment.topRight,
-    end: Alignment.bottomLeft,
-    // stops: [
-    //   1.1,
-    //   0.4,
-    //   5.6,
-    //   10.8,
-    // ],
-    colors: [
-      Color(0xFF97E4C8),
-      Color(0xFF80C7D8),
-      Color(0xFF6FC9D5),
-      // Color(0xFF56BAC7),
-      Color(0xFF4DD1F6)
-    ],
-  );
-  static const LinearGradient blueR = LinearGradient(
-    begin: Alignment.topRight,
-    end: Alignment.bottomLeft,
-    colors: [Colors.blue, Colors.red],
-  );
-  static const LinearGradient blueY = LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      colors: [Colors.blue, Colors.yellow]);
-}
+  

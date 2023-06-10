@@ -1,18 +1,16 @@
-import 'package:Fahkap/components/Button/app_button.dart';
-import 'package:Fahkap/components/Button/themeButton.dart';
-import 'package:Fahkap/components/Widget/app_back_button.dart';
-import 'package:Fahkap/components/Widget/app_input.dart';
-import 'package:Fahkap/components/Widget/app_title_right.dart';
-import 'package:Fahkap/controller/MyController.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/validators.dart';
-import 'package:Fahkap/utils/constants/assets.dart';
+import 'package:iut/components/Widget/app_back_button.dart';
+import 'package:iut/components/Widget/app_input.dart';
+import 'package:iut/components/Widget/app_title_right.dart';
+import 'package:iut/controller/MyController.dart';
+import 'package:iut/styles/colorApp.dart';
+import 'package:iut/styles/textStyle.dart';
+import 'package:iut/utils/Services/validators.dart';
+import 'package:iut/utils/constants/assets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:Fahkap/utils/Services/routing.dart';
+import 'package:iut/utils/Services/routing.dart';
 import 'package:get/get.dart';
 
 class Geolocalisation extends StatelessWidget {

@@ -1,7 +1,5 @@
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:iut/styles/colorApp.dart';
+import 'package:flutter/material.dart'; 
 class AppTitleRight extends StatelessWidget {
   AppTitleRight({required this.title, required this.description});
   final String description;

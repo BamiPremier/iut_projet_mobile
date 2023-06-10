@@ -1,7 +1,6 @@
  
-import 'package:Fahkap/utils/Services/ApiClient.dart';
-import 'package:Fahkap/utils/Services/storageService.dart';
-import 'package:Fahkap/utils/constants/apiRoute.dart';
+import 'package:iut/utils/Services/ApiClient.dart';
+import 'package:iut/utils/constants/apiRoute.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get_storage/get_storage.dart';

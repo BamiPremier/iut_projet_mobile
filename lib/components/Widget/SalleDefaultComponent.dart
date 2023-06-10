@@ -1,15 +1,14 @@
 // ignore: must_be_immutable
-import 'package:Fahkap/Views/Geolocalisation.dart';
-import 'package:Fahkap/controller/MyController.dart';
-import 'package:Fahkap/model/data/BatimentModel.dart';
-import 'package:Fahkap/model/data/SalleDefaultModel.dart';
-import 'package:Fahkap/model/data/SalleModel.dart';
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:iut/Views/Geolocalisation.dart';
+import 'package:iut/controller/MyController.dart';
+import 'package:iut/model/BatimentModel.dart';
+import 'package:iut/model/SalleDefaultModel.dart';
+import 'package:iut/model/SalleModel.dart';
+import 'package:iut/styles/textStyle.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
-import 'package:Fahkap/components/Button/button.dart';
-import 'package:Fahkap/components/Form/commentForm.dart';
-import 'package:Fahkap/styles/colorApp.dart';
+import 'package:iut/components/Button/button.dart';
+import 'package:iut/styles/colorApp.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

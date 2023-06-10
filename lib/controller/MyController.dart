@@ -1,25 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:Fahkap/model/data/BatimentModel.dart';
-import 'package:Fahkap/model/data/ReservationModel.dart';
-import 'package:Fahkap/model/data/SalleDefaultModel.dart';
-import 'package:Fahkap/model/data/SalleModel.dart';
-import 'package:Fahkap/model/data/UserModel.dart';
-import 'package:Fahkap/repository/MyRepo.dart';
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
-import 'package:Fahkap/utils/Services/core.dart';
-import 'package:Fahkap/utils/Services/routing.dart';
-import 'package:Fahkap/utils/Services/storageService2.dart';
-import 'package:Fahkap/utils/constants/assets.dart';
-import 'package:Fahkap/utils/functions/viewFunctions.dart';
+import 'package:iut/model/BatimentModel.dart';
+import 'package:iut/model/ReservationModel.dart';
+import 'package:iut/model/SalleDefaultModel.dart';
+import 'package:iut/model/SalleModel.dart';
+import 'package:iut/model/UserModel.dart';
+import 'package:iut/repository/MyRepo.dart';
+import 'package:iut/utils/Services/core.dart';
+import 'package:iut/utils/Services/routing.dart';
+import 'package:iut/utils/functions/viewFunctions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:Fahkap/utils/constants/apiRoute.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:geolocator/geolocator.dart';
@@ -632,10 +625,9 @@ class MyController extends GetxController {
 
     try {
       Response response = await myRepo.getListSalle();
-    
+
       _SalleList.clear();
       if (response.body != null) {
-     
         if (response.body['data'] != null) {
           _SalleList.addAll((response.body['data'] as List)
               .map((e) => SalleModel.fromJson(e))
@@ -662,17 +654,18 @@ class MyController extends GetxController {
       print('debut gelist sale');
       _SalleDList.clear();
       if (response.body != null) {
-     
         if (response.body['data'] != null) {
           _SalleDList.addAll((response.body['data'] as List)
               .map((e) => SalleDefaultModel.fromJson(e))
               .toList());
-          _isLoadedSalle = 1;
+          _isLoadedSalleD = 1;
           update();
         }
       }
     } catch (e) {
       //print(e);
+      _isLoadedSalleD = 1;
+      update();
     }
   }
 

@@ -1,34 +1,13 @@
-import 'package:Fahkap/styles/textStyle.dart'; 
+import 'package:iut/styles/textStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart'; 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart'; 
+import 'package:get_storage/get_storage.dart';
 
 class ViewFunctions {
   snackBar(String title, String body, bool correct) {
-    // return Get.snackbar(
-    //   title,
-    //   body,
-    //   icon: Icon(correct ? FontAwesomeIcons.check : Icons.error,
-    //       color: correct ? Colors.greenAccent : Colors.red),
-    //   snackPosition: SnackPosition.BOTTOM,
-    //   backgroundColor: Colors.grey[500],
-    //   borderRadius: 20,
-    //   margin: EdgeInsets.all(20),
-    //   colorText: Colors.white,
-    //   duration: Duration(seconds: 5),
-    //   // isDismissible: true,
-    //   dismissDirection: DismissDirection.horizontal,
-    //   forwardAnimationCurve: Curves.linear,
-    // );
-
     Color? color = correct ? Colors.green : Colors.orange[600];
     return Get.snackbar(title, body,
-        // icon: Icon(
-        //   correct ? Icons. : Icons.wifi_off_sharp,
-        //   color: correct ? Colors.greenAccent : Colors.red,
-        // ),
         borderRadius: 5,
         isDismissible: true,
         onTap: (getBar) {},
@@ -80,48 +59,13 @@ class ViewFunctions {
       padding: EdgeInsets.zero,
 
       borderWidth: 100,
-      // showProgressIndicator: true,
     );
   }
 
   closeSnack() {
-    //print('*****************************${Get.isSnackbarOpen}');
     Get.closeCurrentSnackbar();
-    // Get.closeAllSnackbars();
   }
 
-  toast(
-    title,
-  ) {
-    Widget toast = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.0),
-        color: Colors.greenAccent,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.check),
-          SizedBox(
-            width: 12.0,
-          ),
-          Text("This is a Custom Toast"),
-        ],
-      ),
-    );
-
-    Get.snackbar(
-      'Notification',
-      'This is a WhatsApp Toast',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.grey[600],
-      colorText: Colors.white,
-      margin: EdgeInsets.all(16),
-      borderRadius: 16,
-      duration: Duration(seconds: 3),
-    );
-  }  
   showToast(bool status) {
     Color? color = status ? Colors.green : Colors.orange[600];
     String message = !status

@@ -1,13 +1,13 @@
-import 'package:Fahkap/Views/ComplementView/SplashScreen.dart';
-import 'package:Fahkap/Views/HomeView.dart';
-import 'package:Fahkap/Views/ListReservation.dart';
-import 'package:Fahkap/Views/ListSalle.dart';
-import 'package:Fahkap/Views/ListBatiment.dart';
-import 'package:Fahkap/Views/ComplementView/AboutUsView.dart';
-import 'package:Fahkap/Views/ListUtilisateur.dart';
-import 'package:Fahkap/Views/LoginScreen.dart';
-import 'package:Fahkap/Views/RegisterScreen.dart';
-// import 'package:Fahkap/Views/Home/AcheterBillet.dart';
+import 'package:iut/Views/ComplementView/SplashScreen.dart';
+import 'package:iut/Views/HomeView.dart';
+import 'package:iut/Views/ListReservation.dart';
+import 'package:iut/Views/ListSalle.dart';
+import 'package:iut/Views/ListBatiment.dart';
+import 'package:iut/Views/ComplementView/AboutUsView.dart';
+import 'package:iut/Views/ListUtilisateur.dart';
+import 'package:iut/Views/LoginScreen.dart';
+import 'package:iut/Views/RegisterScreen.dart';
+// import 'package:iut/Views/Home/AcheterBillet.dart';
 import 'package:get/get.dart';
 
 var transitionX = Transition.zoom;
@@ -31,7 +31,6 @@ class AppRoutes {
         children: [],
         page: () => HomeView(),
         transition: transitionX),
-
     GetPage(
         name: AppLinks.LIST_RESERV,
         children: [],
@@ -51,7 +50,7 @@ class AppRoutes {
         name: AppLinks.LIST_UTILISATEUR,
         children: [],
         page: () => ListUtilisateur(),
-        transition: transitionX), 
+        transition: transitionX),
   ];
 }
 

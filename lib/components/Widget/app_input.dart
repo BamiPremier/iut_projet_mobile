@@ -1,5 +1,5 @@
-import 'package:Fahkap/styles/colorApp.dart';
-import 'package:Fahkap/styles/textStyle.dart';
+import 'package:iut/styles/colorApp.dart';
+import 'package:iut/styles/textStyle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
