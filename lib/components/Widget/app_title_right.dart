@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AppTitleRight extends StatelessWidget {
-  AppTitleRight(
-      {required this.title, required this.description, required this.icon});
+  AppTitleRight({required this.title, required this.description});
   final String description;
-  final icon;
   final String title;
 
   @override
@@ -27,15 +25,6 @@ class AppTitleRight extends StatelessWidget {
                 color: ColorsApp.black,
                 fontWeight: FontWeight.bold),
           )),
-          Container(
-              child: icon != null
-                  ? SvgPicture.asset(
-                      icon,
-                      width: 18,
-                      height: 18,
-                      color: ColorsApp.black,
-                    )
-                  : null),
         ],
       ),
       Container(

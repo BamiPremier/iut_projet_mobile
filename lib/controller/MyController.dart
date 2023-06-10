@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:Fahkap/model/data/BatimentModel.dart';
 import 'package:Fahkap/model/data/ReservationModel.dart';
+import 'package:Fahkap/model/data/SalleDefaultModel.dart';
 import 'package:Fahkap/model/data/SalleModel.dart';
 import 'package:Fahkap/model/data/UserModel.dart';
 import 'package:Fahkap/repository/MyRepo.dart';
@@ -61,7 +62,8 @@ class MyController extends GetxController {
         box.write('email', Jwt.parseJwt(response.body['token'])['email']);
         box.write('typeUser', Jwt.parseJwt(response.body['token'])['typeUser']);
         readData();
-        Get.toNamed(AppLinks.HOME); // Get.back(closeOverlays: true);
+        Get.offNamedUntil(AppLinks.HOME, (route) => false);
+        await initApp();
         fn.closeSnack();
         update(); // await MyBinding().onGetAll();
       } else {
@@ -106,10 +108,13 @@ class MyController extends GetxController {
       _prenom = Jwt.parseJwt(box.read('token'))['prenom'];
       _phones = Jwt.parseJwt(box.read('token'))['phone'];
       _emails = Jwt.parseJwt(box.read('token'))['email'];
-      _typeUser = Jwt.parseJwt(box.read('token'))['typeUser'];
+      _typeUser = Jwt.parseJwt(box.read('token'))['typeUser'].toString();
 
       update();
+      print('------------------------------------type ${_typeUser}');
     }
+
+    print('------------------------------------type ${_typeUser}');
   }
 
   deconnecter() async {
@@ -140,12 +145,19 @@ class MyController extends GetxController {
   bool _isSignUp = false;
   bool get isSignUp => _isSignUp;
   signUp() async {
-    _isSignUp = true;
     // Get.back(closeOverlays: true);
-    update();
+
     if (pass.text.length < 5) {
       fn.snackBar('Mot de passse', '5 caractes minimum', false);
       return false;
+    }
+    if (pass.text.length == 0 ||
+        name.text.length == 0 ||
+        surname.text.length == 0 ||
+        email.text.length == 0) {
+      fn.snackBar('Compte', 'Veuillez remplir tous les champs', false);
+      _isSignUp = false;
+      update();
     }
 
     var data = {
@@ -156,6 +168,8 @@ class MyController extends GetxController {
       "email": email.text,
       "status": true,
     };
+    _isSignUp = true;
+    update();
     //print(data);
     fn.loading('Inscription', 'Creatoin de votre compte en cours');
 
@@ -170,7 +184,7 @@ class MyController extends GetxController {
       update();
       await loginUser();
 
-      _isSignUp = true;
+      _isSignUp = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
@@ -271,7 +285,7 @@ class MyController extends GetxController {
         // Get.toNamed(AppLinks.LIST_Delegue); // Get.back(closeOverlays: true);
       }
       // fn.snackBar('Mise a jour', response.body['message'], true);
-      _isAddDelegue = true;
+      _isAddDelegue = false;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
@@ -311,7 +325,7 @@ class MyController extends GetxController {
         // Get.toNamed(AppLinks.LIST_BATIMENT); // Get.back(closeOverlays: true);
       }
       // fn.snackBar('Mise a jour', response.body['message'], true);
-      _isAddDelegue = true;
+      // _isAddDelegue = true;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
@@ -450,7 +464,6 @@ class MyController extends GetxController {
       Response response = await myRepo.getListBatiment();
       _BatimentList.clear();
       if (response.body != null) {
-        print(response.body['data']);
         if (response.body['data'].length != 0) {
           _BatimentList.addAll((response.body['data'] as List)
               .map((e) => BatimentModel.fromJson(e))
@@ -480,7 +493,6 @@ class MyController extends GetxController {
       update();
 
       if (response.body != null) {
-        print(response.body['data']);
         if (response.body['data'].length != 0) {
           _SalleBatimentList.addAll((response.body['data'] as List)
               .map((e) => SalleModel.fromJson(e))
@@ -620,13 +632,40 @@ class MyController extends GetxController {
 
     try {
       Response response = await myRepo.getListSalle();
-      print('debut gelist sale');
+    
       _SalleList.clear();
       if (response.body != null) {
-        print(response.body['data']);
+     
         if (response.body['data'] != null) {
           _SalleList.addAll((response.body['data'] as List)
               .map((e) => SalleModel.fromJson(e))
+              .toList());
+          _isLoadedSalle = 1;
+          update();
+        }
+      }
+    } catch (e) {
+      //print(e);
+    }
+  }
+
+  List<SalleDefaultModel> _SalleDList = [];
+  List<SalleDefaultModel> get SalleDList => _SalleDList;
+  int _isLoadedSalleD = 0;
+  int get isLoadedSalleD => _isLoadedSalleD;
+  getListSalleDefault() async {
+    _isLoadedSalle = 0;
+    update();
+
+    try {
+      Response response = await myRepo.getListSalleDefault();
+      print('debut gelist sale');
+      _SalleDList.clear();
+      if (response.body != null) {
+     
+        if (response.body['data'] != null) {
+          _SalleDList.addAll((response.body['data'] as List)
+              .map((e) => SalleDefaultModel.fromJson(e))
               .toList());
           _isLoadedSalle = 1;
           update();
@@ -643,13 +682,12 @@ class MyController extends GetxController {
   TextEditingController _descriptionBatiment = TextEditingController();
   TextEditingController get descriptionBatiment => _descriptionBatiment;
 
-  // onInit() {
-
-  //   super.onInit();
-  //   readData();
-  //    print('--------------------read darta ${id}');
-  //   print('--------------------read darta ${box.read('token')}');
-  // }
+  onInit() {
+    super.onInit();
+    readData();
+    print('--------------------read darta ${id}');
+    print('--------------------read darta ${box.read('token')}');
+  }
 
   TextEditingController _salleId = TextEditingController();
   TextEditingController get salleId => _salleId;
@@ -679,7 +717,7 @@ class MyController extends GetxController {
       fn.closeSnack();
 
       // fn.snackBar('Mise a jour', response.body['message'], true);
-      _isSignUp = true;
+      // _isSignUp = true;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
@@ -688,7 +726,7 @@ class MyController extends GetxController {
       fn.snackBar('Reservation', 'Une erreur est survenue', false);
       //        fn.closeSnack();
 
-      _isSignUp = false;
+      // _isSignUp = false;
       update();
       //print(e);
     }
@@ -715,7 +753,7 @@ class MyController extends GetxController {
       fn.closeSnack();
 
       // fn.snackBar('Mise a jour', response.body['message'], true);
-      _isSignUp = true;
+      // _isSignUp = true;
       // Get.back(closeOverlays: true);
       update();
     } catch (e) {
@@ -724,7 +762,7 @@ class MyController extends GetxController {
       fn.snackBar('Reservation', 'Une erreur est survenue', false);
       //        fn.closeSnack();
 
-      _isSignUp = false;
+      // _isSignUp = false;
       update();
       //print(e);
     }

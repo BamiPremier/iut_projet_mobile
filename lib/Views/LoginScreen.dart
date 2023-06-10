@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                     child: AppTitleRight(
                         title: 'Login',
                         description: 'Welcome dear',
-                        icon: Assets.user),
+                      ),
                     margin: EdgeInsets.only(
                         right: MediaQuery.of(context).size.width * .005),
                   ),
@@ -113,6 +113,7 @@ class LoginScreen extends StatelessWidget {
                         AppButton(
                             size: MainAxisSize.max,
                             bgColor: ColorsApp.black,
+                                            load: _manager.isConnected,
                             text: 'Se connecter'.tr,
                             onTap: () async {
                               //print('dddddss');
@@ -124,8 +125,7 @@ class LoginScreen extends StatelessWidget {
 
                                 await _manager.loginUser();
                                 if (_manager.isConnected) {
-                                  Get.offNamedUntil(
-                                      AppLinks.HOME, (route) => false);
+                               
 
                                   // MyBinding().onGetDataNew();
                                 }

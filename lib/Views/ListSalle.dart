@@ -42,8 +42,18 @@ class ListSalle extends StatelessWidget {
           ),
           body: RefreshIndicator(
               color: ColorsApp.skyBlue,
-              onRefresh: () async {},
-              child: ListView.builder(
+              onRefresh: () async {
+
+                await _controller.getListSalle( );
+
+              },
+              child:  _controller.isLoadedSalle == 0
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.blueAccent,
+                      ),
+                    )
+                  : ListView.builder(
                     itemCount: _controller.SalleList.length,
                   itemBuilder: (_ctx, index) => SalleComponent(
                         salle: _controller.SalleList[index],

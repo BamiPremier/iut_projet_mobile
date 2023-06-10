@@ -44,6 +44,11 @@ class MyRepo extends GetxService {
 
     return a;
   }
+  Future getListSalleDefault() async {
+    Response a = await apiClient.getCollections(ApiRoutes.sale+'/default');
+
+    return a;
+  }
 
   Future getListReservation() async {
     Response a = await apiClient.getCollections(ApiRoutes.reservation);

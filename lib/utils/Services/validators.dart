@@ -10,30 +10,30 @@ class Validators {
 
   static isValidEmail(String? email) {
     if (email == null) return null;
-    return _emailRegExp.hasMatch(email.trim()) ? null : 'invalidMail'.tr;
+    return _emailRegExp.hasMatch(email.trim()) ? null : 'mail invalide';
   }
 
   static isValidEmailOrNum(String? email) {
     if (email == null) return null;
-    return _emailRegExp.hasMatch(email.trim()) ? null : 'invalidMail'.tr;
+    return _emailRegExp.hasMatch(email.trim()) ? null : 'mail invalide';
   }
 
   static String? isValidPassword(String password) {
     if (password.length < 5) {
-      return "invalidCaractP".tr;
+      return "minimum 5 caracteres";
     }
     return null;
   }
 
   static String? isValidRePassword(bool verif) {
     if (verif) {
-      return "invalidRepasss".tr;
+      return "minimum 5 caracteres";
     }
     return null;
   }
 
   static isValidUsername(String username) {
-    return username.length > 3 ? null : "invalidCaract".tr;
+    return username.length > 3 ? null : "4 caractere minimum";
   }
 
   static usPhoneValid(String input) {
@@ -44,10 +44,10 @@ class Validators {
       if (int.tryParse(input) != null) {
         return null;
       } else {
-        return 'invalidPhone'.tr;
+        return 'telephone invalide';
       }
     } else {
-      return 'invalidPhone'.tr;
+      return 'telephone invalide';
     }
   }
 
@@ -56,7 +56,7 @@ class Validators {
     if (int.tryParse(input) != null) {
       return null;
     } else {
-      return 'invalidChiffre'.tr;
+      return 'nombre invalide';
     }
   }
 

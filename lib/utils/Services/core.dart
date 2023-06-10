@@ -8,9 +8,9 @@ import 'package:sqflite/sqlite_api.dart';
 import '../../controller/MyController.dart';
 
 Future<void> initApp() async {
-   
   Get.find<MyController>().readData();
   Get.find<MyController>().getPosition();
+  Get.find<MyController>().getListSalleDefault();
   Get.find<MyController>().getListUser();
   Get.find<MyController>().getListSalle();
   Get.find<MyController>().getListReservation();

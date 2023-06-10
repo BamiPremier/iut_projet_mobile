@@ -30,12 +30,20 @@ class ListReservation extends StatelessWidget {
         body: GetBuilder<MyController>(builder: (_controller) {
           return RefreshIndicator(
               color: ColorsApp.skyBlue,
-              onRefresh: () async {},
-              child: ListView.builder(
-                    itemCount: _controller.ReservationList.length,
-                  itemBuilder: (_ctx, index) => ReservationComponent(
-                        reservation: _controller.ReservationList[index],
-                      ))
+              onRefresh: () async {
+                await _controller.getListReservation();
+              },
+              child: _controller.isLoadedReservation == 0
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.blueAccent,
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: _controller.ReservationList.length,
+                      itemBuilder: (_ctx, index) => ReservationComponent(
+                            reservation: _controller.ReservationList[index],
+                          ))
 
               // Builds 1000 ListTiles
               );

@@ -65,7 +65,7 @@ class BatimentComponent extends StatelessWidget {
                 color: ColorsApp.greySecond,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child:  CachedNetworkImage(
+              child: CachedNetworkImage(
                 height: kMdHeight * .10,
                 width: Get.width * .3,
                 fit: BoxFit.cover,

@@ -43,7 +43,7 @@ class SalleComponent2 extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(12),
                   margin: EdgeInsets.only(left: 10, right: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),

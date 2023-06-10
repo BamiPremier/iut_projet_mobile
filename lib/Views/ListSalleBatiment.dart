@@ -39,12 +39,20 @@ class ListSalleBatiment extends StatelessWidget {
           ),
           body: RefreshIndicator(
               color: ColorsApp.skyBlue,
-              onRefresh: () async {},
-              child: ListView.builder(
-                     itemCount: _controller.SalleBatimentList.length,
-                  itemBuilder: (_ctx, index) => SalleComponent2(
-                        salle: _controller.SalleBatimentList[index],
-                      ))
+              onRefresh: () async {
+                await _controller.getListSalleBatiment(id);
+              },
+              child: _controller.isLoadedBatimentSalle == 0
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.blueAccent,
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: _controller.SalleBatimentList.length,
+                      itemBuilder: (_ctx, index) => SalleComponent2(
+                            salle: _controller.SalleBatimentList[index],
+                          ))
               // Builds 1000 ListTiles
               ));
     });

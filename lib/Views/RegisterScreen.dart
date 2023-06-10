@@ -34,9 +34,9 @@ class RegisterScreen extends StatelessWidget {
                           children: [
                             Container(
                               child: AppTitleRight(
-                                  title: 'S\'inscrire',
-                                  description: 'Welcome dear',
-                                  icon: Assets.user),
+                                title: 'S\'inscrire',
+                                description: 'Welcome dear',
+                              ),
                               margin: EdgeInsets.only(
                                   right:
                                       MediaQuery.of(context).size.width * .005),

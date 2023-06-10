@@ -33,11 +33,17 @@ class ListUtilisateur extends StatelessWidget {
             onRefresh: () async {
               await _controller.getListUser();
             },
-            child: ListView.builder(
-                itemCount: _controller.UserList.length,
-                itemBuilder: (_ctx, index) => UtilsateurComponent(
-                      user: _controller.UserList[index],
-                    )),
+            child: _controller.isLoadedUser == 0
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.blueAccent,
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: _controller.UserList.length,
+                    itemBuilder: (_ctx, index) => UtilsateurComponent(
+                          user: _controller.UserList[index],
+                        )),
 
             // Builds 1000 ListTiles
           );

@@ -44,7 +44,10 @@ class Geolocalisation extends StatelessWidget {
           appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-              title: Text('Suivez la Carte'),
+              title: Text(
+                'Suivez la Carte',
+                style: TextStyle(color: Colors.black),
+              ),
               leading: AppBackButton()),
           body: Stack(alignment: Alignment.center, children: [
             Container(

@@ -37,16 +37,23 @@ class ListBatiment extends StatelessWidget {
         ),
         body: GetBuilder<MyController>(builder: (_controller) {
           return RefreshIndicator(
-            color: ColorsApp.skyBlue,
-            onRefresh: () async {
-              ;
-            },
-            child: ListView.builder(
-                itemCount: _controller.BatimentList.length,
-                itemBuilder: (_ctx, index) => BatimentComponent(batiment: _controller.BatimentList[index],)
-            )
-            // Builds 1000 ListTiles
-          );
+              color: ColorsApp.skyBlue,
+              onRefresh: () async {
+                await _controller.getListBatiment();
+              },
+              child: _controller.isLoadedBatiment == 0
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.blueAccent,
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: _controller.BatimentList.length,
+                      itemBuilder: (_ctx, index) => BatimentComponent(
+                            batiment: _controller.BatimentList[index],
+                          ))
+              // Builds 1000 ListTiles
+              );
         }));
   }
 }
