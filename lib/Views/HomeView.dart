@@ -82,7 +82,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                     child: Image.asset(
                                       "assets/default.jpg",
                                       fit: BoxFit
-                                          .cover, // Adjust the fit property to control how the image fills the available space
+                                          .cover, // 
                                     ))),
                             InkWell(
                               child: Container(
