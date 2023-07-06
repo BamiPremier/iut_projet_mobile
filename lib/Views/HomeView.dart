@@ -1,4 +1,5 @@
 import 'package:iut/components/Button/uploadImage.dart';
+import 'package:iut/components/Widget/DataC.dart';
 import 'package:iut/components/Widget/HomeComponent.dart';
 import 'package:iut/components/Widget/SalleDefaultComponent.dart';
 import 'package:iut/components/Widget/app_input_new.dart';
@@ -10,6 +11,7 @@ import 'package:iut/styles/textStyle.dart';
 import 'package:iut/utils/Services/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iut/utils/constants/assets.dart';
 
 import '../components/Button/app_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -28,21 +30,14 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
 
     return GetBuilder<MyController>(builder: (_controller) {
       return Scaffold(
+          // backgroundColor: Colors.white70,
           appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-              title: Container(
-                  margin: EdgeInsets.only(top: Get.height * .020),
-                  // padding: EdgeInsets.only(
-                  //     left: Get.width * .030, right: Get.width * .030),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AppTitleRight(
-                          title: 'Welcome!',
-                          description: 'Welcome dear',
-                        ),
-                      ])),
+              title: Text(
+                'Dashboard',
+                style: TextStyle(color: Colors.black),
+              ),
               actions: [
                 Container(
                     margin: EdgeInsets.only(top: Get.height * .020),
@@ -71,19 +66,31 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                                height: kMdHeight * .15,
-                                width: Get.width * .88,
-                                decoration: BoxDecoration(
-                                    color: ColorsApp.white,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(
-                                        15.0), // Adjust the radius as needed
-                                    child: Image.asset(
-                                      "assets/default.jpg",
-                                      fit: BoxFit
-                                          .cover, // 
-                                    ))),
+                              height: kMdHeight * .15,
+                              width: Get.width * .88,
+                              decoration: BoxDecoration(
+                                  color: ColorsApp.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      15.0), // Adjust the radius as needed
+                                  child: Image.asset(Assets.logImg,
+                                      height: kHeight / 3.5)),
+                            ),
+
+                            // Container(
+                            //     height: kMdHeight * .15,
+                            //     width: Get.width * .88,
+                            //     decoration: BoxDecoration(
+                            //         color: ColorsApp.white,
+                            //         borderRadius: BorderRadius.circular(10)),
+                            //     child: ClipRRect(
+                            //         borderRadius: BorderRadius.circular(
+                            //             15.0), // Adjust the radius as needed
+                            //         child: Image.asset(
+                            //           "assets/default.jpg",
+                            //           fit: BoxFit.cover, //
+                            //         ))),
                             InkWell(
                               child: Container(
                                   margin: EdgeInsets.symmetric(vertical: 10),
@@ -110,7 +117,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                   )
                                 : Expanded(
                                     child: GridView.builder(
-                                        physics: NeverScrollableScrollPhysics(),
+                                        // physics: NeverScrollableScrollPhysics(),
                                         shrinkWrap: true,
                                         gridDelegate:
                                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -129,6 +136,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                   color: ColorsApp.skyBlue,
                   onRefresh: () async {
                     await _controller.readData();
+                    await _controller.getHomeInfo();
                     await _controller.getPosition();
                     await _controller.getListUser();
                     await _controller.getListSalle();
@@ -142,8 +150,56 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                               // mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                            _controller.isLoadedInfo == 0
+                                ? Container(
+                                    height: 15,
+                                    width: 15,
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: kMarginX,
+                                        vertical: kMarginY),
+                                    child: CircularProgressIndicator())
+                                : Container(
+                                    child: Column(
+                                    // mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          DataC(
+                                            title: "Batiments",
+                                            val: _controller
+                                                .InfoUser.nbre_batiments,
+                                          ),
+                                          DataC(
+                                            title: "Utilsateurs",
+                                            val: _controller
+                                                .InfoUser.nbre_utilisateurs,
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          DataC(
+                                            title: "Salles",
+                                            val: _controller
+                                                .InfoUser.nbre_salles,
+                                          ),
+                                          DataC(
+                                            title: "Reservations",
+                                            val: _controller
+                                                .InfoUser.nbre_reservations,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )),
                             Container(
-                                height: kMdHeight * .15,
+                                height: kMdHeight * .18,
                                 width: Get.width * .88,
                                 decoration: BoxDecoration(
                                     color: ColorsApp.white,
@@ -152,10 +208,11 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                     borderRadius: BorderRadius.circular(
                                         15.0), // Adjust the radius as needed
                                     child: Image.asset(
-                                      "assets/default.jpg",
+                                      "assets/logo.jpg",
                                       fit: BoxFit
                                           .cover, // Adjust the fit property to control how the image fills the available space
                                     ))),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -349,7 +406,8 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                 )
                               ],
                             ),
-                            if (_controller.typeUser == 1)
+                            if (_controller.typeUser == 1 ||
+                                _controller.typeUser == "1")
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -435,6 +493,23 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                           _controller.nomSalle,
                                                       icon: Icon(Icons.label),
                                                       label: 'nom de la salle',
+                                                      validator: (value) {
+                                                        return Validators
+                                                            .isValidUsername(
+                                                                value!);
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: kMarginY * 1.5,
+                                                    ),
+                                                    child: AppInputNew(
+                                                      controller:
+                                                          _controller.nomSalle,
+                                                      icon: Icon(Icons.label),
+                                                      label:
+                                                          'niveau de la salle',
                                                       validator: (value) {
                                                         return Validators
                                                             .isValidUsername(
@@ -559,6 +634,121 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                                           // });
                                                                         },
                                                                       )))),
+                                                  Container(
+                                                      margin: EdgeInsets.only(
+                                                        top: kMarginY,
+                                                      ),
+                                                      child: Text(
+                                                        "Image batiment",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        softWrap: true,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat',
+
+                                                          // fontSize: big ? kXlText / this.percent : kLgText / this.percent,
+                                                        ),
+                                                      )),
+                                                  GetBuilder<MyController>(
+                                                      builder: (_Ncontroller) =>
+                                                          Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      top: kMarginY *
+                                                                          1.5,
+                                                                      right: 5),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: ColorsApp
+                                                                    .greySecond,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                              ),
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                height:
+                                                                    kMdHeight *
+                                                                        .3,
+                                                                width:
+                                                                    Get.width,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                imageUrl:
+                                                                    _Ncontroller
+                                                                        .batiment
+                                                                        .src,
+                                                                imageBuilder:
+                                                                    (context,
+                                                                        imageProvider) {
+                                                                  return Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius: BorderRadius.only(
+                                                                          topRight: Radius.circular(
+                                                                              8),
+                                                                          topLeft:
+                                                                              Radius.circular(8)),
+                                                                      image:
+                                                                          DecorationImage(
+                                                                        image:
+                                                                            imageProvider,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                        /* colorFilter: ColorFilter.mode(
+                                        Colors.red, BlendMode.colorBurn) */
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                                placeholder:
+                                                                    (context,
+                                                                        url) {
+                                                                  return Container(
+                                                                    child: Center(
+                                                                        child: CircularProgressIndicator(
+                                                                      color: ColorsApp
+                                                                          .skyBlue,
+                                                                    )),
+                                                                  );
+                                                                },
+                                                                errorWidget:
+                                                                    (context,
+                                                                        url,
+                                                                        error) {
+                                                                  return CircleAvatar(
+                                                                      backgroundColor:
+                                                                          ColorsApp
+                                                                              .skyBlue,
+                                                                      radius:
+                                                                          50,
+                                                                      backgroundImage:
+                                                                          AssetImage(
+                                                                              "assets/default.jpg"));
+                                                                },
+                                                              ))),
+                                                  Container(
+                                                      margin: EdgeInsets.only(
+                                                        top: kMarginY,
+                                                      ),
+                                                      child: Text(
+                                                        "Image de la salle",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        softWrap: true,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat',
+
+                                                          // fontSize: big ? kXlText / this.percent : kLgText / this.percent,
+                                                        ),
+                                                      )),
                                                   GetBuilder<MyController>(
                                                       builder: (_Ncontroller) =>
                                                           _Ncontroller.isImage
@@ -605,7 +795,7 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                                 .camera_alt,
                                                             onTap: () {
                                                               _controller
-                                                                  .getImagebatimentCamera;
+                                                                  .getImagebatimentCamera();
                                                             },
                                                           ),
                                                           UploadImage(
@@ -638,7 +828,8 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                if (_controller.typeUser == 1)
+                                if (_controller.typeUser == 1 ||
+                                    _controller.typeUser == "1")
                                   HomeComponent(
                                     title: 'Ajouter batiment',
                                     onTap: () => Get.bottomSheet(

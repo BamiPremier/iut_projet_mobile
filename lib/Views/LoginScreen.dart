@@ -16,24 +16,14 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-          AppBar(backgroundColor: Colors.transparent, elevation: 0, actions: [
-        Container(
-            margin: EdgeInsets.only(top: Get.height * .020),
-            padding: EdgeInsets.only(
-                left: Get.width * .030, right: Get.width * .030),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: AppTitleRight(
-                      title: 'Login',
-                      description: 'Welcome dear',
+          AppBar(backgroundColor: Colors.transparent, elevation: 0, title:  
+         
+                   Text(
+                      'Login',
+                      
                     ),
-                    margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width * .005),
-                  ),
-                ])),
-      ]),
+                
+      ),
       body: GetBuilder<MyController>(
         builder: (_manager) => SingleChildScrollView(
           child: Container(
@@ -51,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                     top: Get.size.height * .02,
                   ),
                   child: Text(
-                    " ".tr,
+                    "Connectez vous a votre compte ".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:iut/model/BatimentModel.dart';
+import 'package:iut/model/InfoModel.dart';
 import 'package:iut/model/ReservationModel.dart';
 import 'package:iut/model/SalleDefaultModel.dart';
 import 'package:iut/model/SalleModel.dart';
@@ -222,6 +223,28 @@ class MyController extends GetxController {
     }
   }
 
+  var _InfoUser = null;
+  InfoModel get InfoUser => _InfoUser;
+  int _isLoadedInfo = 0;
+  int get isLoadedInfo => _isLoadedInfo;
+  getHomeInfo() async {
+    _isLoadedUser = 0;
+    update();
+    //print('getCOmeee---------');
+    try {
+      Response response = await myRepo.getHomeInfo();
+
+      if (response.body['data'] != null) {
+        _InfoUser = InfoModel.fromJson(response.body['data']);
+
+        _isLoadedInfo = 1;
+        update();
+      }
+    } catch (e) {
+      //print(e);
+    }
+  }
+
   List<ReservationModel> _ReservationList = [];
   List<ReservationModel> get ReservationList => _ReservationList;
   int _isLoadedReservation = 0;
@@ -338,7 +361,7 @@ class MyController extends GetxController {
   bool get isImage => _isImage;
   Future getImagebatimentCamera() async {
     try {
-      //print("wwwwwwwww");
+      print("wwwwwwwww");
 
       var image = await ImagePicker.pickImage(
           source: ImageSource.camera,
@@ -503,6 +526,9 @@ class MyController extends GetxController {
   TextEditingController _nomSalle = TextEditingController();
   TextEditingController get nomSalle => _nomSalle;
 
+  TextEditingController _niveauSalle = TextEditingController();
+  TextEditingController get niveauSalle => _niveauSalle;
+
   TextEditingController _numeroSalle = TextEditingController();
   TextEditingController get numeroSalle => _numeroSalle;
 
@@ -573,6 +599,7 @@ class MyController extends GetxController {
       'password': pass.text,
       "nom": nomSalle.text,
       "numero": numeroSalle.text,
+      "niveauSalle": numeroSalle.text,
       "idBatiment": batiment.id,
       "latitude": latitude,
       "longitude": longitude
@@ -688,10 +715,19 @@ class MyController extends GetxController {
   TextEditingController _idUser = TextEditingController();
   TextEditingController get idUser => _idUser;
 
+  TextEditingController _debut = TextEditingController();
+  TextEditingController get debut => _debut;
+  TextEditingController _fin = TextEditingController();
+  TextEditingController get fin => _fin;
+  TextEditingController _motif = TextEditingController();
+  TextEditingController get motif => _motif;
   reserverSalle(salleId) async {
     var data = {
       'idSalle': salleId,
       'idUser': id,
+      'motif': motif.text,
+      'debut': debut.text,
+      'fin': fin.text,
     };
     //print(data);
     fn.loading('Reservation', 'Reservation de votre salle en cours');

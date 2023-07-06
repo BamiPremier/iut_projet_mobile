@@ -93,10 +93,19 @@ class BatimentComponent extends StatelessWidget {
                   );
                 },
                 errorWidget: (context, url, error) {
-                  return CircleAvatar(
-                      backgroundColor: ColorsApp.skyBlue,
-                      radius: 50,
-                      backgroundImage: AssetImage("assets/images/error.gif"));
+                  return Container(
+                      height: kMdHeight * .15,
+                      width: Get.width * .88,
+                      decoration: BoxDecoration(
+                          color: ColorsApp.white,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                              15.0), // Adjust the radius as needed
+                          child: Image.asset(
+                            "assets/default.jpg",
+                            fit: BoxFit.cover, //
+                          )));
                 },
               )))),
     );

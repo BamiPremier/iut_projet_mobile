@@ -11,4 +11,5 @@ class ApiRoutes {
   static const delegueset = '/delegue/set';
   static const delegueunset = '/delegue/unset';
   static const reservation = '/reservations';
+  static const homeinfos = '/homeinfos';
 }

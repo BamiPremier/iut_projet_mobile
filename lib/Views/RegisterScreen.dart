@@ -21,26 +21,13 @@ class RegisterScreen extends StatelessWidget {
             appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                leading: AppBackButton(),
-                actions: [
-                  Container(
-                      margin: EdgeInsets.only(top: Get.height * .020),
-                      padding: EdgeInsets.only(
-                          left: Get.width * .030, right: Get.width * .030),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              child: AppTitleRight(
-                                title: 'S\'inscrire',
-                                description: 'Welcome dear',
-                              ),
-                              margin: EdgeInsets.only(
-                                  right:
-                                      MediaQuery.of(context).size.width * .005),
-                            ),
-                          ])),
-                ]),
+                leading: AppBackButton(), title:  
+         
+                   Text(
+                    'S\'inscrire',
+                      
+                    ),
+               ),
             body: SingleChildScrollView(
                 child: Container(
                     margin: EdgeInsets.symmetric(horizontal: kMarginX),
@@ -60,14 +47,25 @@ class RegisterScreen extends StatelessWidget {
                             key: _manager.formKeyReg,
                             child: Column(
                               children: [
+                              new Hero(
+                  tag: "login screen",
+                  child: new Container(
+                      child: Image.asset(Assets.logImg, height: kHeight / 3.5)),
+                ),         Container(
+                          child: Text(
+                        'IUT - FV',
+                        style: TextStyle(
+                            fontSize: 45, fontWeight: FontWeight.bold),
+                      )),
                                 Container(
                                   margin: EdgeInsets.only(bottom: kMarginY * 3),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text('S\'inscrire',
+                                      Text('Creer un compte',
                                           style: TextStyle(
                                               fontFamily: 'Montserrat',
+                                              fontSize:25,
                                               fontWeight: FontWeight.bold)),
                                     ],
                                   ),
@@ -166,7 +164,17 @@ class RegisterScreen extends StatelessWidget {
                                                   // MyBinding().onGetDataNew();
                                                 }
                                               }
-                                            }))),
+                                            }))),   Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: kMarginY,
+                                    ),
+                                    child:  AppButton(
+                                            size: MainAxisSize.max,
+                                            text: 'Annuler',
+                                           bgColor:Colors.red,
+                                            onTap: () async {
+                                            Get.back();
+                                            })),
                               ],
                             )),
                       ))

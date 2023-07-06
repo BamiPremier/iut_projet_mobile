@@ -66,42 +66,73 @@ class SalleComponent2 extends StatelessWidget {
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15))),
             height: 800,
-            child: Container(
-                decoration: BoxDecoration(
-                  color: ColorsApp.greySecond,
-                  // borderRadius: BorderRadius.circular(8),
-                ),
-                child: CachedNetworkImage(
-                  height: kMdHeight * .10,
-                  width: Get.width * .3,
-                  fit: BoxFit.cover,
-                  imageUrl: salle.src,
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                          /* colorFilter: ColorFilter.mode(
+            padding: EdgeInsets.symmetric(horizontal: kMarginX, vertical: 10),
+            child: Column(children: [
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text('Batiment : ' + salle.batiment),
+                    ),
+                  ]),
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text('Niveau :' + salle.niveauSalle),
+                    ),
+                  ]),
+              Container(
+                  margin: EdgeInsets.only(
+                    top: kMarginY * 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: ColorsApp.greySecond,
+                    // borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: CachedNetworkImage(
+                    height: kMdHeight * .2,
+                    width: Get.width * .8,
+                    fit: BoxFit.cover,
+                    imageUrl: salle.src,
+                    imageBuilder: (context, imageProvider) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                            /* colorFilter: ColorFilter.mode(
                                         Colors.red, BlendMode.colorBurn) */
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  placeholder: (context, url) {
-                    return Container(
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: ColorsApp.skyBlue,
-                      )),
-                    );
-                  },
-                  errorWidget: (context, url, error) {
-                    return CircleAvatar(
-                        backgroundColor: ColorsApp.skyBlue,
-                        radius: 50,
-                        backgroundImage: AssetImage("assets/images/error.gif"));
-                  },
-                )))));
+                      );
+                    },
+                    placeholder: (context, url) {
+                      return Container(
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: ColorsApp.skyBlue,
+                        )),
+                      );
+                    },
+                    errorWidget: (context, url, error) {
+                      return Container(
+                          height: kMdHeight * .2,
+                          width: Get.width * .8,
+                          decoration: BoxDecoration(
+                              color: ColorsApp.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  15.0), // Adjust the radius as needed
+                              child: Image.asset(
+                                "assets/default.jpg",
+                                fit: BoxFit.cover, //
+                              )));
+                    },
+                  ))
+            ]))));
   }
 }

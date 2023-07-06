@@ -13,6 +13,8 @@ class SalleModel {
   SalleModel({
     required this.nomSalle,
     required this.numeroSalle,
+    required this.batiment,
+    required this.niveauSalle,
     required this.capaciteSalle,
     required this.src,
     required this.longitude,
@@ -21,7 +23,9 @@ class SalleModel {
   });
 
   String nomSalle;
+  String niveauSalle;
   String numeroSalle;
+  String batiment;
   String capaciteSalle;
   final String src;
   String longitude;
@@ -31,6 +35,8 @@ class SalleModel {
   factory SalleModel.fromJson(Map<String, dynamic> json) => SalleModel(
         nomSalle: json["nomSalle"],
         numeroSalle: json["numeroSalle"],
+        batiment: json["batiment"] ?? "Inconnu",
+        niveauSalle: json["niveauSalle"].toString() ?? '0',
         capaciteSalle: json["capaciteSalle"].toString(),
         src: json["src"] == null ? null : json["src"],
         longitude: json["longitude"].toString(),
@@ -40,7 +46,9 @@ class SalleModel {
 
   Map<String, dynamic> toJson() => {
         "nomSalle": nomSalle,
+        "niveauSalle": niveauSalle,
         "numeroSalle": numeroSalle,
+        "batiment": batiment,
         "capaciteSalle": capaciteSalle,
         "longitude": longitude,
         "src": src == null ? null : src,

@@ -1,4 +1,3 @@
- 
 import 'package:iut/utils/Services/ApiClient.dart';
 import 'package:iut/utils/constants/apiRoute.dart';
 import 'package:get/get.dart';
@@ -32,6 +31,12 @@ class MyRepo extends GetxService {
     }
   }
 
+  Future getHomeInfo() async {
+    Response a = await apiClient.getCollections(ApiRoutes.homeinfos);
+
+    return a;
+  }
+
   Future getListUser() async {
     Response a = await apiClient.getCollections(ApiRoutes.user);
 
@@ -43,8 +48,9 @@ class MyRepo extends GetxService {
 
     return a;
   }
+
   Future getListSalleDefault() async {
-    Response a = await apiClient.getCollections(ApiRoutes.sale+'/default');
+    Response a = await apiClient.getCollections(ApiRoutes.sale + '/default');
 
     return a;
   }

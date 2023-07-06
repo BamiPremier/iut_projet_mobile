@@ -1,5 +1,6 @@
 // ignore: must_be_immutable
 import 'package:iut/Views/Geolocalisation.dart';
+import 'package:iut/components/Widget/app_input_new.dart';
 import 'package:iut/controller/MyController.dart';
 import 'package:iut/model/BatimentModel.dart';
 import 'package:iut/model/SalleModel.dart';
@@ -55,65 +56,155 @@ class SalleComponent extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.yellow),
-                  child: InkWell(
-                    child: Text('Reserver'),
-                    onTap: () =>
-                        Get.find<MyController>().reserverSalle(salle.id),
-                  ),
-                )
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.yellow),
+                    child: InkWell(
+                      child: Text('Reserver'),
+                      onTap: () => Get.bottomSheet(
+                        GetBuilder<MyController>(
+                          builder: (_Ncontroller) => Container(
+                              margin: EdgeInsets.only(
+                                top: kMarginY * 8,
+                              ),
+                              decoration: BoxDecoration(
+                                  color: ColorsApp.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15))),
+                              height: 800,
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: kMarginX),
+                              child: Column(children: [
+                                Container(
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                      TextButton(
+                                        child: Text('Annuler'),
+                                        onPressed: () {
+                                          Get.back(closeOverlays: true);
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: _Ncontroller.isAddSalle == true
+                                            ? CircularProgressIndicator(
+                                                color: Colors.blueAccent,
+                                              )
+                                            : Text('Reserver'),
+                                        onPressed: () async {
+                                          Get.find<MyController>()
+                                              .reserverSalle(salle.id);
+                                        },
+                                      )
+                                    ])),
+                                Row(
+                                  children: [
+                                    AppInputNew(
+                                      controller: _Ncontroller.debut,
+                                      icon: Icon(Icons.lock_clock),
+                                      label: 'Date de Debut',
+                                    ),
+                                    AppInputNew(
+                                      controller: _Ncontroller.fin,
+                                      icon: Icon(Icons.lock_clock),
+                                      label: 'Date de Fin',
+                                    ),
+                                    AppInputNew(
+                                      controller: _Ncontroller.motif,
+                                      icon: Icon(Icons.label),
+                                      label: 'Motif de la reservation',
+                                    ),
+                                  ],
+                                )
+                              ])),
+                        ),
+                      ),
+                    ))
               ],
             )),
         onTap: () => Get.bottomSheet(Container(
             margin: EdgeInsets.only(
               top: kMarginY * 8,
             ),
+           
             decoration: BoxDecoration(
                 color: ColorsApp.white,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15))),
             height: 800,
-            child: Container(
-                decoration: BoxDecoration(
-                  color: ColorsApp.greySecond,
-                  // borderRadius: BorderRadius.circular(8),
-                ),
-                child: CachedNetworkImage(
-                  height: kMdHeight * .10,
-                  width: Get.width * .3,
-                  fit: BoxFit.cover,
-                  imageUrl: salle.src,
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                          /* colorFilter: ColorFilter.mode(
+            padding: EdgeInsets.symmetric(horizontal: kMarginX,vertical: 10),
+            child: Column(children: [
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text('Batiment : ' + salle.batiment),
+                    ),
+                  ]),
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text('Niveau :' + salle.niveauSalle),
+                    ),
+                  ]),
+              Container(
+                  decoration: BoxDecoration(
+                    color: ColorsApp.greySecond,
+                    // borderRadius: BorderRadius.circular(8),
+                  ),
+
+                     margin: EdgeInsets.only(
+                    top: kMarginY * 2,
+                  ),
+                  child: CachedNetworkImage(
+                    height: kMdHeight * .2,
+                    width: Get.width * .8,
+                    fit: BoxFit.cover,
+                    imageUrl: salle.src,
+                    imageBuilder: (context, imageProvider) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          // borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                            /* colorFilter: ColorFilter.mode(
                                         Colors.red, BlendMode.colorBurn) */
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  placeholder: (context, url) {
-                    return Container(
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: ColorsApp.skyBlue,
-                      )),
-                    );
-                  },
-                  errorWidget: (context, url, error) {
-                    return CircleAvatar(
-                        backgroundColor: ColorsApp.skyBlue,
-                        radius: 50,
-                        backgroundImage: AssetImage("assets/images/error.gif"));
-                  },
-                )))));
+                      );
+                    },
+                    placeholder: (context, url) {
+                      return Container(
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: ColorsApp.skyBlue,
+                        )),
+                      );
+                    },
+                    errorWidget: (context, url, error) {
+                      return Container(
+                          height: kMdHeight * .2,
+                          width: Get.width * .8,
+                          decoration: BoxDecoration(
+                              color: ColorsApp.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  15.0), // Adjust the radius as needed
+                              child: Image.asset(
+                                "assets/default.jpg",
+                                fit: BoxFit.cover, //
+                              )));
+                    },
+                  ))
+            ]))));
   }
 }
