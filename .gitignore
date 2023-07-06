@@ -1,7 +1,7 @@
 /build
 /build/windows
 /build/flutter_assets
-
+/.dart_tool
 build
 /build/
 /build/windows
