@@ -599,7 +599,7 @@ class MyController extends GetxController {
       'password': pass.text,
       "nom": nomSalle.text,
       "numero": numeroSalle.text,
-      "niveauSalle": numeroSalle.text,
+      "niveauSalle": niveauSalle.text,
       "idBatiment": batiment.id,
       "latitude": latitude,
       "longitude": longitude

@@ -505,8 +505,8 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
                                                       top: kMarginY * 1.5,
                                                     ),
                                                     child: AppInputNew(
-                                                      controller:
-                                                          _controller.nomSalle,
+                                                      controller: _controller
+                                                          .niveauSalle,
                                                       icon: Icon(Icons.label),
                                                       label:
                                                           'niveau de la salle',
